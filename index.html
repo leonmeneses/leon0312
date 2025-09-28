@@ -45,7 +45,7 @@
     <h2>Definición de recursividad</h2>
     <p>Un procedimiento recursivo se define por dos elementos clave: <em>casos base</em> (condiciones que terminan la recursión) y el <em>paso recursivo</em> (llamadas a la misma función que progresan hacia el caso base). La recursión modela naturalmente problemas auto‑similares.</p>
   
-      <img src="images/Diagrama re.png" alt="Diagrama recursión" width="150"/>
+      <img src="images/Diagrama re.png" alt="Diagrama recursión" width="200"/>
      
   </section>
 
@@ -73,10 +73,7 @@
   <section id="complex" class="card">
     <h2>Complejidad computacional en algoritmos recursivos</h2>
     <p>El análisis se hace mediante <em>ecuaciones de recurrencia</em>. Por ejemplo, para las Torres de Hanoi T(n)=2T(n-1)+1 ⇒ T(n)=2^n−1 (exponencial). Para algoritmos divide‑y‑vencerás usamos el Teorema Maestro.</p>
-    <figure>
-      <img class="figure" src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Complexity_chart.png" alt="Gráfica complejidad"/>
-      <figcaption>Ejemplo ilustrativo de clases de complejidad. Fuente: dominio público / Wikimedia.</figcaption>
-    </figure>
+    <img src="images/Grafica complejo.png" alt="Grafica de complejidad" width="200"/>
   </section>
 
   <section id="examples" class="card full">
@@ -91,10 +88,9 @@ function fact(n){
 }
 </code></pre>
         <p><strong>Complejidad:</strong> O(n) llamadas, O(n) tiempo y O(n) espacio (pila).</p>
-        <figure>
-          <img class="figure" src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Factorial.png" alt="Factorial illustration"/>
-          <figcaption>Representación del producto para n!. (imagen ilustrativa)</figcaption>
-        </figure>
+     
+          <img src="images/Facotorial.png" alt="Factorial illustration" width="200"/>
+         
       </div>
 
       <div class="card">
@@ -106,10 +102,9 @@ function fib(n){
 }
 </code></pre>
         <p><strong>Complejidad:</strong> O(φ^n) (exponencial) en la versión pura; con memoización O(n).</p>
-        <figure>
-          <img class="figure" src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Fibonacci_spiral_34.svg" alt="Espiral Fibonacci"/>
-          <figcaption>Espiral y disposición basada en Fibonacci. Fuente: Wikimedia Commons.</figcaption>
-        </figure>
+       
+          <img src="images/Espiral.png" alt="Espiral Fibonacci"/>
+          
       </div>
 
       <div class="card">
@@ -123,19 +118,17 @@ function hanoi(n, A, B, C){
 }
 </code></pre>
         <p><strong>Complejidad:</strong> T(n)=2T(n-1)+1 ⇒ T(n)=2^n − 1 (exponencial).</p>
-        <figure>
-          <img class="figure" src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Tower_of_Hanoi_animation.gif" alt="Torres de Hanoi"/>
-          <figcaption>Animación de solución para n discos (GIF). Fuente: Wikimedia Commons.</figcaption>
-        </figure>
+      
+          <img src="images/Torres.jpeg" alt="Torres de Hanoi"/>
+          
       </div>
 
       <div class="card">
         <h3>Fractales (Sierpinski - Pascal)</h3>
         <p>El triángulo de Sierpinski aparece coloreando por paridad el triángulo de Pascal (impares = coloreados). También se genera recursivamente subdividiendo triángulos.</p>
-        <figure>
-          <img class="figure" src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Sierpinski_triangle.svg" alt="Sierpinski"/>
-          <figcaption>Triángulo de Sierpinski generado recursivamente. Fuente: Wikimedia Commons.</figcaption>
-        </figure>
+       
+          <img src="images/ierpinski.png" alt="Sierpinski"/>
+         
       </div>
 
     </div>
@@ -156,12 +149,12 @@ function hanoi(n, A, B, C){
       <li>MIT OpenCourseWare, "Introduction to Algorithms (lecture notes)", MIT, 2020. [Online]. Available: https://ocw.mit.edu/</li>
       <li>Numberphile, "The Tower of Hanoi", YouTube video, 2019. [Online]. Available: https://www.youtube.com/user/numberphile</li>
     </ol>
-    <p style="color:var(--muted);font-size:0.95rem">Nota: además de las referencias IEEE listadas, se incluyeron imágenes de dominio público o con licencias compatibles (Wikimedia Commons). En el PDF de entrega se colocará la lista completa y las capturas solicitadas.</p>
+   
   </section>
 
 </div>
 <footer>
-  <p>Equipo: (máx. 3 integrantes) • Sitio listo para publicar en GitHub Pages • Generado como archivo estático HTML</p>
+ 
 </footer>
 </body>
 </html>
