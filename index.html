@@ -1,77 +1,274 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Recursividad en Algoritmos — Proyecto</title>
   <style>
-    :root{--bg:#0b1220;--card:#071422;--accent:#60a5fa;--muted:#94a3b8}
-    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#071021 0%,#071628 100%);color:#e6eef6}
-    header{padding:36px 20px;text-align:center}
-    h1{margin:0;font-size:2.2rem}
-    .container{max-width:1100px;margin:20px auto;padding:20px}
-    .card{background:rgba(255,255,255,0.03);border-radius:12px;padding:18px;margin-bottom:18px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
-    nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
-    a.btn{background:linear-gradient(90deg,var(--accent),#7dd3fc);padding:8px 14px;border-radius:8px;color:#021022;text-decoration:none;font-weight:600}
-    pre{background:#061022;padding:12px;border-radius:8px;overflow:auto}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .full{grid-column:1/-1}
-    img.figure{width:100%;border-radius:8px;margin-top:8px}
-    figure{margin:0}
-    figcaption{color:var(--muted);font-size:0.9rem;margin-top:6px}
-    footer{opacity:0.9;padding:16px;text-align:center;color:var(--muted)}
-    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+    :root{
+      --bg:#0b1220;
+      --card:#071422;
+      --accent:#60a5fa;
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      background:linear-gradient(180deg,#071021 0%,#071628 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
 
-    /* --- Portada --- */
+    /* --- Portada de pantalla completa --- */
     .portada {
       display:flex;
       flex-direction:column;
       align-items:center;
       justify-content:center;
       text-align:center;
-      height:100vh;
-      background:linear-gradient(180deg,#0b1220,#071422);
-      padding:40px;
-      box-sizing:border-box;
+      min-height:100vh;
+      padding:40px 20px;
+      gap:8px;
+      background:linear-gradient(180deg, rgba(6,12,20,0.9), rgba(4,8,14,0.95));
     }
-    .portada h1 {
-      font-size:2.5rem;
+    .portada h1{
+      font-size:2rem;
       color:var(--accent);
-      margin-bottom:20px;
-    }
-    .portada h2 {
-      font-size:1.6rem;
-      margin:10px 0;
-    }
-    .portada p {
-      font-size:1.2rem;
       margin:6px 0;
+      letter-spacing:0.6px;
     }
-    .portada .small {
-      font-size:1rem;
-      color:var(--muted);
-      margin-top:12px;
+    .portada h2{font-size:1.1rem;margin:6px 0;color:#dbeefe}
+    .portada p{margin:4px 0;font-size:1rem}
+    .portada .small{font-size:0.95rem;color:var(--muted);margin-top:12px}
+    .btn-enter{
+      margin-top:18px;
+      background:linear-gradient(90deg,var(--accent),#7dd3fc);
+      color:#021022;
+      padding:10px 18px;
+      border-radius:10px;
+      text-decoration:none;
+      font-weight:700;
+      box-shadow:0 6px 20px rgba(2,6,23,0.6);
     }
+
+    /* --- Contenido principal --- */
+    header{padding:18px 20px;text-align:center}
+    header h1{margin:0;font-size:1.6rem}
+    .container{max-width:1100px;margin:24px auto;padding:18px}
+    .card{background:var(--glass);border-radius:12px;padding:18px;margin-bottom:18px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
+    nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
+    a.btn{background:linear-gradient(90deg,var(--accent),#7dd3fc);padding:8px 14px;border-radius:8px;color:#021022;text-decoration:none;font-weight:600}
+    pre{background:#061022;padding:12px;border-radius:8px;overflow:auto}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .full{grid-column:1/-1}
+    img.figure{width:100%;border-radius:8px;margin-top:8px;display:block}
+    figure{margin:0}
+    figcaption{color:var(--muted);font-size:0.9rem;margin-top:6px}
+    footer{opacity:0.9;padding:16px;text-align:center;color:var(--muted)}
+
+    /* pequeños ajustes responsive */
+    @media(max-width:900px){
+      .grid{grid-template-columns:1fr}
+      .portada h1{font-size:1.6rem}
+    }
+
+    /* estilo para enlaces internos */
+    .toc { display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin-top:6px; }
+    .badge { background:rgba(255,255,255,0.03); padding:6px 10px; border-radius:8px; color:var(--muted); font-weight:600; text-decoration:none; }
   </style>
 </head>
 <body>
 
-<!-- Portada -->
-<section class="portada">
-  <h1>TECNOLÓGICO DE ESTUDIOS SUPERIORES JOCOTITLÁN</h1>
-  <h2>Materia: ESTRUCTURA DE DATOS</h2>
-  <p><strong>Integrantes:</strong></p>
-  <p>LEONEL ALEJANDRO MENESES LÓPEZ</p>
-  <p>JOSÉ LUIS BERNAL ANTONILO</p>
-  <p>VIOLETA SEGUNDO LÓPEZ</p>
-  <p class="small"><strong>Docente:</strong> DR. EN C. JUAN ALBERTO ANTONIO VELÁZQUEZ</p>
-</section>
+  <!-- ===== PORTADA ===== -->
+  <section class="portada" role="banner" aria-labelledby="titulo-portada">
+    <h1 id="titulo-portada">TECNOLÓGICO DE ESTUDIOS SUPERIORES JOCOTITLÁN</h1>
+    <h2>Proyecto: Recursividad en Algoritmos</h2>
+    <p><strong>Materia:</strong> ESTRUCTURA DE DATOS</p>
 
-<header>
-  <h1>Recursividad en Algoritmos</h1>
-</header>
-<div class="container">
-  <!-- lo demás de tu contenido va aquí -->
-</div>
+    <div style="margin-top:14px;">
+      <p style="font-weight:700;margin:2px 0;">Integrantes</p>
+      <p>LEONEL ALEJANDRO MENESES LÓPEZ</p>
+      <p>JOSÉ LUIS BERNAL ANTONILO</p>
+      <p>VIOLETA SEGUNDO LÓPEZ</p>
+    </div>
+
+    <p class="small"><strong>Docente:</strong> DR. EN C. JUAN ALBERTO ANTONIO VELÁZQUEZ</p>
+
+    <!-- Botón para ir al contenido -->
+    <a class="btn-enter" href="#main-content" title="Ir al contenido">Entrar al contenido</a>
+    <p style="color:var(--muted);margin-top:10px;font-size:0.95rem">Proyecto para publicación en GitHub Pages — recuerda subir la carpeta <code>images/</code> con tus imágenes</p>
+  </section>
+
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
+  <header aria-hidden="true">
+    <h1>Recursividad en Algoritmos</h1>
+  </header>
+
+  <main id="main-content" class="container" role="main">
+
+    <!-- Introducción / Toc -->
+    <div class="card">
+      <h2>Portada / Introducción</h2>
+      <p>La <strong>recursividad</strong> es una técnica en la que una función se llama a sí misma para resolver instancias más pequeñas del mismo problema. Es ampliamente usada para expresar soluciones elegantes a problemas como factorial, Fibonacci, Torres de Hanoi y para generar fractales.</p>
+
+      <nav class="toc" aria-label="Tabla de contenidos">
+        <a class="badge" href="#def">Definición</a>
+        <a class="badge" href="#apps">Aplicaciones</a>
+        <a class="badge" href="#char">Características</a>
+        <a class="badge" href="#complex">Complejidad</a>
+        <a class="badge" href="#examples">Ejemplos</a>
+        <a class="badge" href="#concl">Conclusión</a>
+        <a class="badge" href="#refs">Referencias</a>
+      </nav>
+    </div>
+
+    <!-- Definición -->
+    <section id="def" class="card" aria-labelledby="def-title">
+      <h2 id="def-title">Definición de recursividad</h2>
+      <p>Un procedimiento recursivo se define por dos elementos clave: <em>casos base</em> (condiciones que terminan la recursión) y el <em>paso recursivo</em> (llamadas a la misma función que progresan hacia el caso base). La recursión modela naturalmente problemas auto-similares.</p>
+
+      <!-- imagen local: coloca tu archivo en images/ con este nombre -->
+      <figure>
+        <img class="figure" src="images/Diagrama re.png" alt="Diagrama recursión" />
+        <figcaption>Esquema: una función que se llama a sí misma hasta alcanzar el caso base. (archivo: images/Diagrama re.png)</figcaption>
+      </figure>
+    </section>
+
+    <!-- Aplicaciones -->
+    <section id="apps" class="card" aria-labelledby="apps-title">
+      <h2 id="apps-title">Procedimientos recursivos y sus aplicaciones</h2>
+      <ul>
+        <li>Ordenamiento y búsqueda divide-y-vencerás (merge sort, quicksort).</li>
+        <li>Problemas combinatorios (permutaciones, combinaciones).</li>
+        <li>Algoritmos clásicos (Factorial, Fibonacci, Torres de Hanoi).</li>
+        <li>Generación de fractales y gráficos auto-similares (Sierpinski, Mandelbrot).</li>
+      </ul>
+      <p>La recursividad también se combina con <strong>memoización</strong> para optimizar versiones exponenciales (por ejemplo Fibonacci).</p>
+    </section>
+
+    <!-- Características -->
+    <section id="char" class="card" aria-labelledby="char-title">
+      <h2 id="char-title">Características de la recursividad</h2>
+      <ul>
+        <li>Expresividad y claridad: el código suele ser más corto y más cercano a la definición matemática.</li>
+        <li>Uso de pila de llamadas (stack): cada llamada guarda su estado, lo que implica mayor uso de memoria en profundidad elevada.</li>
+        <li>Necesidad de casos base: para evitar bucles infinitos y desbordamientos de pila.</li>
+        <li>Transformaciones: muchas recursiones pueden convertirse en iterativas o optimizarse con memoización y recursión de cola.</li>
+      </ul>
+    </section>
+
+    <!-- Complejidad -->
+    <section id="complex" class="card" aria-labelledby="complex-title">
+      <h2 id="complex-title">Complejidad computacional en algoritmos recursivos</h2>
+      <p>El análisis se hace mediante <em>ecuaciones de recurrencia</em>. Por ejemplo, para las Torres de Hanoi T(n)=2T(n-1)+1 ⇒ T(n)=2^n−1 (exponencial). Para algoritmos divide-y-vencerás usamos el Teorema Maestro.</p>
+
+      <figure>
+        <img class="figure" src="images/Grafica complejo.jpg" alt="Grafica de complejidad" />
+        <figcaption>Ejemplo ilustrativo de clases de complejidad. (archivo: images/Grafica complejo.jpg)</figcaption>
+      </figure>
+    </section>
+
+    <!-- Ejemplos -->
+    <section id="examples" class="card full" aria-labelledby="examples-title">
+      <h2 id="examples-title">Ejemplos con explicaciones y gráficos</h2>
+
+      <div class="grid">
+
+        <!-- Factorial -->
+        <div class="card">
+          <h3>Factorial (recursivo)</h3>
+          <pre><code>// JavaScript - factorial recursivo
+function fact(n){
+  if(n<=1) return 1;
+  return n * fact(n-1);
+}
+</code></pre>
+          <p><strong>Complejidad:</strong> O(n) llamadas, O(n) tiempo y O(n) espacio (pila).</p>
+          <figure>
+            <img class="figure" src="images/Facotorial.png" alt="Factorial illustration" width="200"/>
+            <figcaption>Ilustración producto factorial. (archivo: images/Facotorial.png)</figcaption>
+          </figure>
+        </div>
+
+        <!-- Fibonacci -->
+        <div class="card">
+          <h3>Fibonacci (recursivo)</h3>
+          <pre><code>// Recursivo sencillo (ineficiente)
+function fib(n){
+  if(n<=1) return n;
+  return fib(n-1)+fib(n-2);
+}
+</code></pre>
+          <p><strong>Complejidad:</strong> O(φ^n) (exponencial) en la versión pura; con memoización O(n).</p>
+          <figure>
+            <img class="figure" src="images/Espiral.png" alt="Espiral Fibonacci"/>
+            <figcaption>Espiral y disposición basada en Fibonacci. (archivo: images/Espiral.png)</figcaption>
+          </figure>
+        </div>
+
+        <!-- Torres de Hanoi -->
+        <div class="card">
+          <h3>Torres de Hanoi</h3>
+          <pre><code>// Mover n discos de A a C usando B
+function hanoi(n, A, B, C){
+  if(n==0) return;
+  hanoi(n-1, A, C, B);
+  move(A, C);
+  hanoi(n-1, B, A, C);
+}
+</code></pre>
+          <p><strong>Complejidad:</strong> T(n)=2T(n-1)+1 ⇒ T(n)=2^n − 1 (exponencial).</p>
+          <figure>
+            <img class="figure" src="images/Torres.jpeg" alt="Torres de Hanoi"/>
+            <figcaption>Animación/imagen de Torres de Hanoi. (archivo: images/Torres.jpeg)</figcaption>
+          </figure>
+        </div>
+
+        <!-- Fractales -->
+        <div class="card">
+          <h3>Fractales (Sierpinski - Pascal)</h3>
+          <p>El triángulo de Sierpinski aparece coloreando por paridad el triángulo de Pascal (impares = coloreados). También se genera recursivamente subdividiendo triángulos.</p>
+          <figure>
+            <img class="figure" src="images/ierpinski.png" alt="Sierpinski"/>
+            <figcaption>Triángulo de Sierpinski generado recursivamente. (archivo: images/ierpinski.png)</figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Conclusión -->
+    <section id="concl" class="card" aria-labelledby="concl-title">
+      <h2 id="concl-title">Conclusión</h2>
+      <p>La recursividad es esencial en ciencias computacionales por su capacidad para modelar problemas auto-similares y por la simplicidad que ofrece al expresar soluciones. No obstante, requiere análisis de complejidad y, a veces, técnicas de optimización (memoización, recursión de cola) para ser práctica en problemas grandes.</p>
+    </section>
+
+    <!-- Referencias -->
+    <section id="refs" class="card" aria-labelledby="refs-title">
+      <h2 id="refs-title">Referencias (IEEE)</h2>
+      <ol>
+        <li>G. S. Khan Academy, "Recursion in computer science", Khan Academy, 2024. [Online]. Available: https://www.khanacademy.org/</li>
+        <li>R. Garg, "Introduction to Recursion", GeeksforGeeks, 2016. [Online]. Available: https://www.geeksforgeeks.org/recursion/</li>
+        <li>J. Smith, "Towers of Hanoi - recursive solution", GeeksforGeeks, 2025. [Online]. Available: https://www.geeksforgeeks.org/tower-of-hanoi/</li>
+        <li>MIT OpenCourseWare, "Introduction to Algorithms (lecture notes)", MIT, 2020. [Online]. Available: https://ocw.mit.edu/</li>
+        <li>Numberphile, "The Tower of Hanoi", YouTube video, 2019. [Online]. Available: https://www.youtube.com/user/numberphile</li>
+      </ol>
+      <p style="color:var(--muted);font-size:0.95rem">Nota: además de las referencias IEEE listadas, se incluyen imágenes locales en la carpeta <code>images/</code> (sube los archivos con esos nombres). Si quieres, formateo las referencias en IEEE más estrictas (con autores completos y enlaces exactos).</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <div style="max-width:1100px;margin:12px auto;padding:12px;color:var(--muted);text-align:center">
+      <p style="margin:6px 0">Proyecto: Recursividad en Algoritmos — Estructura de Datos</p>
+      <p style="margin:6px 0">Equipo: LEONEL ALEJANDRO MENESES LÓPEZ • JOSÉ LUIS BERNAL ANTONILO • VIOLETA SEGUNDO LÓPEZ</p>
+      <p style="margin:6px 0">Docente: DR. EN C. JUAN ALBERTO ANTONIO VELÁZQUEZ</p>
+    </div>
+  </footer>
+
 </body>
 </html>
+
