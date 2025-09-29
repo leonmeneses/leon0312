@@ -21,139 +21,57 @@
     figcaption{color:var(--muted);font-size:0.9rem;margin-top:6px}
     footer{opacity:0.9;padding:16px;text-align:center;color:var(--muted)}
     @media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+    /* --- Portada --- */
+    .portada {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      height:100vh;
+      background:linear-gradient(180deg,#0b1220,#071422);
+      padding:40px;
+      box-sizing:border-box;
+    }
+    .portada h1 {
+      font-size:2.5rem;
+      color:var(--accent);
+      margin-bottom:20px;
+    }
+    .portada h2 {
+      font-size:1.6rem;
+      margin:10px 0;
+    }
+    .portada p {
+      font-size:1.2rem;
+      margin:6px 0;
+    }
+    .portada .small {
+      font-size:1rem;
+      color:var(--muted);
+      margin-top:12px;
+    }
   </style>
 </head>
 <body>
+
+<!-- Portada -->
+<section class="portada">
+  <h1>TECNOLÓGICO DE ESTUDIOS SUPERIORES JOCOTITLÁN</h1>
+  <h2>Materia: ESTRUCTURA DE DATOS</h2>
+  <p><strong>Integrantes:</strong></p>
+  <p>LEONEL ALEJANDRO MENESES LÓPEZ</p>
+  <p>JOSÉ LUIS BERNAL ANTONILO</p>
+  <p>VIOLETA SEGUNDO LÓPEZ</p>
+  <p class="small"><strong>Docente:</strong> DR. EN C. JUAN ALBERTO ANTONIO VELÁZQUEZ</p>
+</section>
+
 <header>
   <h1>Recursividad en Algoritmos</h1>
-  
 </header>
 <div class="container">
-  <div class="card">
-    <h2>Portada / Introducción</h2>
-    <p>La <strong>recursividad</strong> es una técnica en la que una función se llama a sí misma para resolver instancias más pequeñas del mismo problema. Es ampliamente usada para expresar soluciones elegantes a problemas como factorial, Fibonacci, Torres de Hanoi y para generar fractales.</p>
-    <nav>
-      <a class="btn" href="#def">Definición</a>
-      <a class="btn" href="#apps">Aplicaciones</a>
-      <a class="btn" href="#examples">Ejemplos</a>
-      <a class="btn" href="#concl">Conclusión</a>
-      <a class="btn" href="#refs">Referencias</a>
-    </nav>
-  </div>
-
-  <section id="def" class="card">
-    <h2>Definición de recursividad</h2>
-    <p>Un procedimiento recursivo se define por dos elementos clave: <em>casos base</em> (condiciones que terminan la recursión) y el <em>paso recursivo</em> (llamadas a la misma función que progresan hacia el caso base). La recursión modela naturalmente problemas auto‑similares.</p>
-  
-      <img src="images/Diagrama re.png" alt="Diagrama recursión" />
-     
-  </section>
-
-  <section id="apps" class="card">
-    <h2>Procedimientos recursivos y sus aplicaciones</h2>
-    <ul>
-      <li>Ordenamiento y búsqueda divide‑y‑vencerás (merge sort, quicksort).</li>
-      <li>Problemas combinatorios (permutaciones, combinaciones).</li>
-      <li>Algoritmos clásicos (Factorial, Fibonacci, Torres de Hanoi).</li>
-      <li>Generación de fractales y gráficos auto‑similares (Sierpinski, Mandelbrot).</li>
-    </ul>
-    <p>La recursividad también se combina con <strong>memoización</strong> para optimizar versiones exponenciales (por ejemplo Fibonacci).</p>
-  </section>
-
-  <section id="char" class="card">
-    <h2>Características de la recursividad</h2>
-    <ul>
-      <li>Expresividad y claridad: el código suele ser más corto y más cercano a la definición matemática.</li>
-      <li>Uso de pila de llamadas (stack): cada llamada guarda su estado, lo que implica mayor uso de memoria en profundidad elevada.</li>
-      <li>Necesidad de casos base: para evitar bucles infinitos y desbordamientos de pila.</li>
-      <li>Transformaciones: muchas recursiones pueden convertirse en iterativas o optimizarse con memoización y recursión de cola.</li>
-    </ul>
-  </section>
-
-  <section id="complex" class="card">
-    <h2>Complejidad computacional en algoritmos recursivos</h2>
-    <p>El análisis se hace mediante <em>ecuaciones de recurrencia</em>. Por ejemplo, para las Torres de Hanoi T(n)=2T(n-1)+1 ⇒ T(n)=2^n−1 (exponencial). Para algoritmos divide‑y‑vencerás usamos el Teorema Maestro.</p>
-    <img src="images/Grafica complejo.jpg" alt="Grafica de complejidad" />
-  </section>
-
-  <section id="examples" class="card full">
-    <h2>Ejemplos con explicaciones y gráficos</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Factorial (recursivo)</h3>
-        <pre><code>// JavaScript - factorial recursivo
-function fact(n){
-  if(n<=1) return 1;
-  return n * fact(n-1);
-}
-</code></pre>
-        <p><strong>Complejidad:</strong> O(n) llamadas, O(n) tiempo y O(n) espacio (pila).</p>
-     
-          <img src="images/Facotorial.png" alt="Factorial illustration" width="200"/>
-         
-      </div>
-
-      <div class="card">
-        <h3>Fibonacci (recursivo)</h3>
-        <pre><code>// Recursivo sencillo (ineficiente)
-function fib(n){
-  if(n<=1) return n;
-  return fib(n-1)+fib(n-2);
-}
-</code></pre>
-        <p><strong>Complejidad:</strong> O(φ^n) (exponencial) en la versión pura; con memoización O(n).</p>
-       
-          <img src="images/Espiral.png" alt="Espiral Fibonacci"/>
-          
-      </div>
-
-      <div class="card">
-        <h3>Torres de Hanoi</h3>
-        <pre><code>// Mover n discos de A a C usando B
-function hanoi(n, A, B, C){
-  if(n==0) return;
-  hanoi(n-1, A, C, B);
-  move(A, C);
-  hanoi(n-1, B, A, C);
-}
-</code></pre>
-        <p><strong>Complejidad:</strong> T(n)=2T(n-1)+1 ⇒ T(n)=2^n − 1 (exponencial).</p>
-      
-          <img src="images/Torres.jpeg" alt="Torres de Hanoi"/>
-          
-      </div>
-
-      <div class="card">
-        <h3>Fractales (Sierpinski - Pascal)</h3>
-        <p>El triángulo de Sierpinski aparece coloreando por paridad el triángulo de Pascal (impares = coloreados). También se genera recursivamente subdividiendo triángulos.</p>
-       
-          <img src="images/ierpinski.png" alt="Sierpinski"/>
-         
-      </div>
-
-    </div>
-  </section>
-
-  <section id="concl" class="card">
-    <h2>Conclusión</h2>
-    <p>La recursividad es esencial en ciencias computacionales por su capacidad para modelar problemas auto‑similares y por la simplicidad que ofrece al expresar soluciones. No obstante, requiere análisis de complejidad y, a veces, técnicas de optimización (memoización, recursión de cola) para ser práctica en problemas grandes.</p>
-  </section>
-
-  <section id="refs" class="card">
-    <h2>Referencias (IEEE)</h2>
-    <ol>
-      <li>G. S. Khan Academy, "Recursion in computer science", Khan Academy, 2024. [Online]. Available: https://www.khanacademy.org/</li>
-      <li>R. Garg, "Introduction to Recursion", GeeksforGeeks, 2016. [Online]. Available: https://www.geeksforgeeks.org/recursion/</li>
-      <li>J. Smith, "Towers of Hanoi - recursive solution", GeeksforGeeks, 2025. [Online]. Available: https://www.geeksforgeeks.org/tower-of-hanoi/</li>
-      <li>MIT OpenCourseWare, "Introduction to Algorithms (lecture notes)", MIT, 2020. [Online]. Available: https://ocw.mit.edu/</li>
-      <li>Numberphile, "The Tower of Hanoi", YouTube video, 2019. [Online]. Available: https://www.youtube.com/user/numberphile</li>
-    </ol>
-   
-  </section>
-
+  <!-- lo demás de tu contenido va aquí -->
 </div>
-<footer>
- 
-</footer>
 </body>
 </html>
